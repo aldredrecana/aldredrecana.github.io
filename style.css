@@ -1,0 +1,514 @@
+/* ===== THEME: change these colors to restyle the whole site ===== */
+:root {
+  --bg: #070b14;
+  --text: #e6edf7;
+  --muted: #8b98ad;
+  --accent: #00e5ff; /* neon accent (try #a855f7 for purple) */
+  --accent-2: #7c3aed;
+  --glass: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.12);
+  --font: "Poppins", sans-serif;
+  --mono: "Fira Code", monospace;
+}
+
+/* ===== Base ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+}
+.mono {
+  font-family: var(--mono);
+}
+.accent {
+  color: var(--accent);
+}
+.container {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 90px 20px 30px;
+}
+.title {
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  margin-bottom: 36px;
+  text-align: center;
+}
+
+/* Three.js canvas sits behind everything */
+#bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* ===== Glassmorphism: blur + transparent background ===== */
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+/* ===== Buttons ===== */
+.btn-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+.btn {
+  display: inline-block;
+  cursor: pointer;
+  font: 600 1rem var(--font);
+  padding: 12px 28px;
+  border-radius: 999px;
+  border: 2px solid var(--accent);
+  background: var(--accent);
+  color: #031018;
+  transition:
+    transform 0.25s,
+    box-shadow 0.25s,
+    background 0.25s;
+}
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 22px var(--accent);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--accent);
+}
+.btn-outline:hover {
+  background: var(--accent);
+  color: #031018;
+}
+.btn.sm {
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  background: rgba(7, 11, 20, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1050px;
+  margin: auto;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  font: 500 1.3rem var(--mono);
+  color: var(--accent);
+}
+.nav-links {
+  display: flex;
+  gap: 28px;
+}
+.nav-links a {
+  color: var(--muted);
+  position: relative;
+  transition: color 0.25s;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.25s;
+}
+.nav-links a:hover {
+  color: var(--text);
+}
+.nav-links a:hover::after {
+  width: 100%;
+}
+.hamburger {
+  display: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  padding: 6px;
+}
+.hamburger span {
+  width: 26px;
+  height: 3px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: 0.3s;
+}
+.hamburger.open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ===== Hero ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.hero .container {
+  padding-top: 120px;
+}
+.hero h1 {
+  font-size: clamp(2.4rem, 9vw, 5rem);
+  line-height: 1.1;
+  margin: 6px 0 10px;
+  text-shadow: 0 0 30px rgba(0, 229, 255, 0.35);
+}
+.hero h2 {
+  font-size: clamp(1.1rem, 3.5vw, 1.7rem);
+  font-weight: 400;
+  color: var(--muted);
+}
+#typing {
+  color: var(--accent);
+}
+.cursor {
+  color: var(--accent);
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ===== About ===== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 30px;
+  align-items: center;
+}
+.photo {
+  height: 240px;
+  display: grid;
+  place-items: center;
+  font: 700 4rem var(--mono);
+  color: var(--accent);
+}
+.about-text p + p {
+  margin-top: 14px;
+}
+.about-text {
+  color: var(--muted);
+}
+
+/* ===== Skills ===== */
+/* ===== Skills: moving tech rows ===== */
+.tech {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+.tech-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  font: 500 0.72rem var(--mono);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.tech-label::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--dot);
+  box-shadow: 0 0 8px var(--dot);
+}
+.tech-label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border), transparent);
+}
+
+/* The window hides the overflow and fades both edges */
+.tech-window {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+/* The track holds two identical halves, so moving it -50% loops seamlessly */
+.tech-track {
+  display: flex;
+  width: max-content;
+  animation: scroll var(--dur, 40s) linear infinite;
+}
+.tech-row.reverse .tech-track {
+  animation-direction: reverse;
+}
+.tech-row:hover .tech-track {
+  animation-play-state: paused;
+}
+@keyframes scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.tile {
+  flex: none;
+  width: 92px;
+  height: 82px;
+  margin-right: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(14, 19, 30, 0.88);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition:
+    transform 0.25s,
+    border-color 0.25s,
+    box-shadow 0.25s;
+}
+.tile img {
+  width: 32px;
+  height: 32px;
+}
+.tile img.invert {
+  filter: invert(1);
+} /* for black icons on the dark theme */
+.tile span {
+  font: 0.68rem var(--mono);
+  color: var(--muted);
+}
+.tile:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+  box-shadow: 0 0 16px rgba(0, 229, 255, 0.3);
+}
+
+/* ===== Projects ===== */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  perspective: 1000px;
+}
+.card {
+  transition:
+    transform 0.15s ease-out,
+    box-shadow 0.3s;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.card:hover {
+  box-shadow: 0 0 28px rgba(0, 229, 255, 0.25);
+}
+.card-img {
+  height: 150px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  display: grid;
+  place-items: center;
+  font: 700 2.4rem var(--mono);
+  color: #fff;
+  background: linear-gradient(135deg, var(--g1), var(--g2));
+  transform: translateZ(30px);
+}
+.card h3 {
+  margin-bottom: 6px;
+  transform: translateZ(20px);
+}
+.card p {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.tags span {
+  font: 0.75rem var(--mono);
+  padding: 3px 10px;
+  border-radius: 99px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+
+/* ===== Contact ===== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+input,
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font: 1rem var(--font);
+  transition:
+    border-color 0.25s,
+    box-shadow 0.25s;
+}
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.3);
+}
+form .btn {
+  align-self: flex-start;
+}
+.socials {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.socials a {
+  color: var(--muted);
+  transition:
+    color 0.25s,
+    transform 0.25s;
+  word-break: break-all;
+}
+.socials a:hover {
+  color: var(--accent);
+  transform: translateX(6px);
+}
+
+/* ===== Footer ===== */
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ===== Scroll reveal: JS adds .show when visible ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.8s,
+    transform 0.8s;
+}
+.reveal.show {
+  opacity: 1;
+  transform: none;
+}
+/* Cards keep their own transform for tilt, so reveal them with opacity only after showing */
+.card.reveal.show {
+  transform: none;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 800px) {
+  .hamburger {
+    display: flex;
+  }
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+    background: rgba(7, 11, 20, 0.95);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s;
+  }
+  .nav-links.open {
+    max-height: 320px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-links a {
+    display: block;
+    padding: 14px 24px;
+  }
+  .about-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+  .photo {
+    height: 180px;
+    max-width: 180px;
+    margin: auto;
+  }
+}
+/* Respect "reduce motion", but keep the slow skills marquee and the typing cursor */
+@media (prefers-reduced-motion: reduce) {
+  *:not(.tech-track):not(.cursor) {
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
