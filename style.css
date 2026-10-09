@@ -222,7 +222,7 @@ ul {
   display: grid;
   grid-template-columns: 240px 1fr;
   gap: 30px;
-  align-items: center;
+  align-items: start;
 }
 .photo {
   height: 240px;
@@ -230,12 +230,67 @@ ul {
   place-items: center;
   font: 700 4rem var(--mono);
   color: var(--accent);
+  overflow: hidden;
+  padding: 0;
+}
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.about-text {
+  color: var(--muted);
 }
 .about-text p + p {
   margin-top: 14px;
 }
-.about-text {
-  color: var(--muted);
+.about-text strong {
+  color: var(--text);
+}
+.about-lead {
+  color: var(--text);
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.about-facts {
+  display: grid;
+  gap: 8px;
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 0.92rem;
+}
+.about-facts b {
+  display: inline-block;
+  min-width: 96px;
+  color: var(--accent);
+  font: 500 0.8rem var(--mono);
+}
+.about-facts .open {
+  color: #4ade80;
+}
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 22px;
+}
+.about-stats div {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+}
+.about-stats strong {
+  display: block;
+  font-size: 1.6rem;
+  color: var(--accent);
+  line-height: 1.2;
+}
+.about-stats span {
+  font-size: 0.75rem;
 }
 
 /* ===== Skills ===== */
