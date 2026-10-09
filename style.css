@@ -391,6 +391,40 @@ ul {
   color: var(--accent);
 }
 
+/* ===== Certifications ===== */
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+.cert {
+  border-left: 3px solid var(--accent);
+  transition:
+    transform 0.25s,
+    box-shadow 0.3s;
+}
+.cert:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 22px rgba(0, 229, 255, 0.25);
+}
+.cert-date {
+  font: 0.75rem var(--mono);
+  color: var(--accent);
+}
+.cert h3 {
+  margin: 6px 0 4px;
+  font-size: 1.05rem;
+}
+.cert-org {
+  color: var(--text);
+  font-size: 0.9rem;
+}
+.cert p:last-child {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: 6px;
+}
+
 /* ===== Contact ===== */
 .contact-grid {
   display: grid;
